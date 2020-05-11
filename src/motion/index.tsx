@@ -1,14 +1,7 @@
 import * as React from "react"
 import { createMotionComponent } from "./component"
-import { createDomMotionConfig } from "./features/dom"
-import { HTMLMotionComponents, SVGMotionComponents, MotionProps } from "./types"
-
-export { MotionContext } from "./context/MotionContext"
-export { MotionValuesMap } from "./utils/use-motion-values"
-export { useExternalRef } from "./utils/use-external-ref"
-export { ValueAnimationControls } from "../animation/ValueAnimationControls"
-export { MotionProps }
-export { createMotionComponent }
+//import { createDomMotionConfig } from "./features/dom"
+import { HTMLMotionComponents, SVGMotionComponents } from "./types"
 
 /**
  * Convert any React component into a `motion` component. The provided component
@@ -24,8 +17,9 @@ export { createMotionComponent }
  *
  * @public
  */
-function custom<Props>(Component: string | React.ComponentType<Props>) {
-    return createMotionComponent<Props>(createDomMotionConfig(Component))
+function custom<Props>(_Component: string | React.ComponentType<Props>) {
+    return createMotionComponent("div")
+    //return createMotionComponent<Props>(createDomMotionConfig(Component))
 }
 
 type CustomMotionComponent = { custom: typeof custom }
@@ -38,7 +32,8 @@ function getMotionComponent(target: CustomMotionComponent, key: string) {
     if (!componentCache.has(key)) {
         componentCache.set(
             key,
-            createMotionComponent(createDomMotionConfig(key))
+            createMotionComponent("div")
+            //createMotionComponent(createDomMotionConfig(key))
         )
     }
 
